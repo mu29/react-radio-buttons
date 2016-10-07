@@ -4,9 +4,9 @@
   "description": "Well-designed radio buttons for react.",
   "main": "index.js",
   "scripts": {
-    "example": "webpack -w -d --config example/webpack.config.js example/example.jsx example/all.js",
-    "build-umd": "webpack index.jsx umd/index.js",
-    "build-cjs": "babel index.jsx -d lib",
+    "example": "webpack -w -d --config example/webpack.config.js example/example.js example/all.js",
+    "build-umd": "webpack index.js umd/index.js",
+    "build-cjs": "babel index.js -d lib",
     "prerelease": "npm run build-umd && npm run build-cjs"
   },
   "repository": {
