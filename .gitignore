@@ -1,0 +1,8 @@
+.DS_Store
+index.html
+out
+node_modules
+lib
+umd
+example/all*
+
