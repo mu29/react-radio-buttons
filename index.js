@@ -18,7 +18,12 @@ export class RadioGroup extends Component {
   }
 
   onCheck(index) {
+    const { onChange, children } = this.props;
+    const child = children[index];
+    if (!child) return;
+
     this.setState({ checkedIndex: index });
+    onChange && onChange(child.props.value || '');
   }
 
   renderChild(child, index, checked) {
@@ -43,6 +48,7 @@ export class RadioGroup extends Component {
 RadioGroup.propTypes = {
   children: PropTypes.node,
   checkedIndex: PropTypes.integer,
+  onChange: PropTypes.func,
 };
 
 export class RadioButton extends Component {
@@ -94,8 +100,12 @@ export class RadioButton extends Component {
 }
 
 RadioButton.propTypes = {
+  padding: PropTypes.number,
+  rootColor: PropTypes.string,
+  pointColor: PropTypes.string,
   value: PropTypes.string,
   index: PropTypes.number,
+  checked: PropTypes.boolean,
   children: PropTypes.node,
   onCheck: PropTypes.func,
 };
