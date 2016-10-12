@@ -1,17 +1,17 @@
 {
   "name": "react-radio-buttons",
-  "version": "1.0.0",
+  "version": "1.0.6",
   "description": "Well-designed radio buttons for react.",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "example": "webpack -w -d --config example/webpack.config.js example/example.js example/all.js",
-    "build-umd": "webpack index.js umd/index.js",
-    "build-cjs": "babel index.js -d lib",
+    "example": "webpack -w -d --config example/webpack.config.js example/example.jsx example/all.js",
+    "build-umd": "webpack index.jsx umd/index.js",
+    "build-cjs": "babel index.jsx -d lib",
     "prerelease": "npm run build-umd && npm run build-cjs"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mu29/react-radio-button.git"
+    "url": "https://github.com/mu29/react-radio-buttons.git"
   },
   "keywords": [
     "facebook",
@@ -23,9 +23,12 @@
     "react-component"
   ],
   "devDependencies": {
-    "babel": "^5.5.8",
-    "babel-core": "^5.2.17",
-    "babel-loader": "^5.0.0",
+    "babel-cli": "^6.16.0",
+    "babel-core": "^6.16.0",
+    "babel-loader": ">=6.0.0",
+    "babel-preset-es2015": "^6.16.0",
+    "babel-preset-react": "^6.16.0",
+    "babel-preset-stage-0": "^6.16.0",
     "eslint": "^3.7.1",
     "eslint-config-airbnb": "^12.0.0",
     "eslint-plugin-import": "^2.0.0",
@@ -33,10 +36,13 @@
     "eslint-plugin-react": "^6.3.0",
     "webpack": "^1.8.11"
   },
-  "engines": { "node": ">= 5.11.0" },
+  "engines": {
+    "node": ">= 5.11.0"
+  },
   "author": "InJung Chung <mu29@yeoubi.net>",
   "license": "MIT",
   "dependencies": {
-    "react": "^15.3.2"
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2"
   }
 }

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { RadioGroup, RadioButton } from '../index.js';
+import { RadioGroup, RadioButton } from '../index.jsx';
 
 let App = React.createClass({
   onChange(value) {
