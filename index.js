@@ -80,18 +80,48 @@ RadioButton.propTypes = {
 class RadioIcon extends Component {
   constructor() {
     super();
+    this.getStyles = this.getStyles.bind(this);
+  }
+  getStyles() {
+    const { size, rootColor, pointColor } = this.props;
+    
+    return {
+      root: {
+        width: size || 20,
+        height: size || 20,
+        backgroundColor: '#FFF',
+        borderWidth: 2,
+        borderRadius: '50%',
+        borderStyle: 'solid',
+        borderColor: rootColor || '#9E9E9E',
+      },
+      checked: {
+        borderColor: pointColor || '#8CB9FD',
+      },
+      inner: {
+        width: size ? size / 2 : 10,
+        height: size ? size / 2 : 10,
+        borderRadius: '50%',
+        background: pointColor || '#8CB9FD',
+      }
+    }
   }
 
   render() {
     const { checked } = this.props;
+    const style = this.getStyles();
+    const iconStyle = Object.assign(style.root, checked ? style.checked : {});
     return (
-      <div className={ `btn-radio-icon${checked && '-checked' || ''}` }>
-        { checked && <div className="btn-radio-icon-checked-inner" /> }
+      <div style={ iconStyle }>
+        { checked && <div style={ style.inner } /> }
       </div>
     );
   }
 }
 
 RadioIcon.propTypes = {
+  size: PropTypes.number,
+  rootColor: PropTypes.string,
+  pointColor: PropTypes.string,
   checked: PropTypes.boolean,
 };
