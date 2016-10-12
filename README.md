@@ -42,6 +42,7 @@ By using `react-radio-button`, you can write like this (full example [here](http
 | name     | description    | 
 |----------|----------------|
 |iconSize|size of `RadioIcon`, which appear right side of button|
+|iconInnerSize|size of `RadioIcon` 's inner icon when selected, proper value is same as iconSize or half of iconSize|
 |padding|padding size|
 |rootColor|color when unselected|
 |pointColor|color when selected|
