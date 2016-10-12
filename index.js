@@ -82,13 +82,15 @@ class RadioIcon extends Component {
     super();
     this.getStyles = this.getStyles.bind(this);
   }
+
   getStyles() {
     const { size, rootColor, pointColor } = this.props;
     
     return {
       root: {
-        width: size || 20,
-        height: size || 20,
+        width: size || 10,
+        height: size || 10,
+        padding: 3,
         backgroundColor: '#FFF',
         borderWidth: 2,
         borderRadius: '50%',
@@ -99,8 +101,8 @@ class RadioIcon extends Component {
         borderColor: pointColor || '#8CB9FD',
       },
       inner: {
-        width: size ? size / 2 : 10,
-        height: size ? size / 2 : 10,
+        width: size || 10,
+        height: size || 10,
         borderRadius: '50%',
         background: pointColor || '#8CB9FD',
       }
