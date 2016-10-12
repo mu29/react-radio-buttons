@@ -6,7 +6,7 @@ export class RadioGroup extends Component {
     const index = children.findIndex(c => c.props.value === value);
     this.state = { checkedIndex: index > -1 ? index : 0 };
     this.renderChild = this.renderChild.bind(this);
-    this.onCheck = this.onCheck.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
   get value() {
@@ -17,7 +17,7 @@ export class RadioGroup extends Component {
     return child && child.props.value || '';
   }
 
-  onCheck(index) {
+  onChange(index) {
     const { onChange, children } = this.props;
     const child = children[index];
     if (!child) return;
@@ -28,7 +28,7 @@ export class RadioGroup extends Component {
 
   renderChild(child, index, checked) {
     return React.cloneElement(child, {
-      index, checked, onCheck: this.onCheck, ...child.props
+      index, checked, onChange: this.onChange, ...child.props
     });
   }
 
@@ -78,8 +78,8 @@ export class RadioButton extends Component {
   }
 
   onClick() {
-    const { onCheck, checked, index } = this.props;
-    onCheck && onCheck(index);
+    const { onChange, checked, index } = this.props;
+    onChange && onChange(index);
   }
 
   render() {
@@ -107,7 +107,7 @@ RadioButton.propTypes = {
   index: PropTypes.number,
   checked: PropTypes.boolean,
   children: PropTypes.node,
-  onCheck: PropTypes.func,
+  onChange: PropTypes.func,
 };
 
 class RadioIcon extends Component {

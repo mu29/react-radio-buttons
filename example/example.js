@@ -5,9 +5,12 @@ import ReactDOM from 'react-dom';
 import { RadioGroup, RadioButton } from '../index.js';
 
 let App = React.createClass({
+  onChange(value) {
+    console.log(value);
+  },
   render() {
     return (
-      <RadioGroup>
+      <RadioGroup onChange={ this.onChange }>
         <RadioButton value="apple">
           Apple
         </RadioButton>
