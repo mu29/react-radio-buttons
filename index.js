@@ -52,7 +52,7 @@ export class RadioGroup extends Component {
 RadioGroup.propTypes = {
   horizontal: PropTypes.boolean,
   children: PropTypes.node,
-  checkedIndex: PropTypes.integer,
+  value: PropTypes.string,
   onChange: PropTypes.func,
 };
 
@@ -90,7 +90,7 @@ export class RadioButton extends Component {
   }
 
   render() {
-    const { checked, children } = this.props;
+    const { checked, iconSize, rootColor, pointColor, children } = this.props;
     const style = this.getStyles();
     const buttonStyle = Object.assign(style.root, checked ? style.checked : {});
     return (
@@ -99,7 +99,7 @@ export class RadioButton extends Component {
           <div style={ { flex: 1 } }>
             { children }
           </div>
-          <RadioIcon checked={ checked } />
+          <RadioIcon size={ iconSize } checked={ checked } rootColor={ rootColor }, pointColor={ pointColor } />
         </div>
       </div>
     );
@@ -107,6 +107,7 @@ export class RadioButton extends Component {
 }
 
 RadioButton.propTypes = {
+  iconSize: PropTypes.number,
   padding: PropTypes.number,
   rootColor: PropTypes.string,
   pointColor: PropTypes.string,
