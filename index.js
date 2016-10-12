@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 
 export class RadioGroup extends Component {
-  constructor() {
+  constructor({ children, value }) {
     super();
-    this.state = { checkedIndex: -1 };
+    const index = children.findIndex(c => c.props.value === value);
+    this.state = { checkedIndex: index || 0 };
     this.renderChild = this.renderChild.bind(this);
     this.onCheck = this.onCheck.bind(this);
   }
