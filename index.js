@@ -4,7 +4,7 @@ export class RadioGroup extends Component {
   constructor({ children, value }) {
     super();
     const index = children.findIndex(c => c.props.value === value);
-    this.state = { checkedIndex: index || 0 };
+    this.state = { checkedIndex: index > -1 ? index : 0 };
     this.renderChild = this.renderChild.bind(this);
     this.onCheck = this.onCheck.bind(this);
   }
