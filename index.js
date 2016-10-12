@@ -99,7 +99,7 @@ export class RadioButton extends Component {
           <div style={ { flex: 1 } }>
             { children }
           </div>
-          <RadioIcon size={ iconSize } checked={ checked } rootColor={ rootColor }, pointColor={ pointColor } />
+          <RadioIcon size={ iconSize } checked={ checked } rootColor={ rootColor } pointColor={ pointColor } />
         </div>
       </div>
     );
