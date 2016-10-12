@@ -26,8 +26,16 @@
     "babel": "^5.5.8",
     "babel-core": "^5.2.17",
     "babel-loader": "^5.0.0",
+    "eslint": "^3.7.1",
+    "eslint-config-airbnb": "^12.0.0",
+    "eslint-plugin-import": "^2.0.0",
+    "eslint-plugin-jsx-a11y": "^2.2.2",
+    "eslint-plugin-react": "^6.3.0",
     "webpack": "^1.8.11"
   },
   "author": "InJung Chung <mu29@yeoubi.net>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "react": "^15.3.2"
+  }
 }
