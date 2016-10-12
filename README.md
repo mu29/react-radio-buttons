@@ -1,4 +1,4 @@
-# [React](http://facebook.github.io/react/)-radio-button
+# [React](http://facebook.github.io/react/)-radio-buttons
 Well-designed radio buttons for react
 
 
