@@ -10,17 +10,32 @@ let App = React.createClass({
   },
   render() {
     return (
-      <RadioGroup onChange={ this.onChange }>
-        <RadioButton value="apple">
-          Apple
-        </RadioButton>
-        <RadioButton value="orange">
-          Orange
-        </RadioButton>
-        <RadioButton value="watermelon">
-          Watermelon
-        </RadioButton>
-      </RadioGroup>
+      <div style={ { padding: 16 } }>
+        <h2>Vertical Radio Buttons</h2>
+        <RadioGroup onChange={ this.onChange }>
+          <RadioButton value="apple">
+            Apple
+          </RadioButton>
+          <RadioButton value="orange">
+            Orange
+          </RadioButton>
+          <RadioButton value="melon">
+            Melon
+          </RadioButton>
+        </RadioGroup>
+        <h2 style={ { marginTop: 64 } }>Horizontal Radio Buttons</h2>
+        <RadioGroup onChange={ this.onChange } horizontal>
+          <RadioButton value="apple">
+            Apple
+          </RadioButton>
+          <RadioButton value="orange">
+            Orange
+          </RadioButton>
+          <RadioButton value="melon">
+            Melon
+          </RadioButton>
+        </RadioGroup>
+      </div>
     );
   }
 });
