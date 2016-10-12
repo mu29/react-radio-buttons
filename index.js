@@ -47,20 +47,42 @@ RadioGroup.propTypes = {
 export class RadioButton extends Component {
   constructor() {
     super();
+    this.getStyles = this.getStyles.bind(this);
     this.onClick = this.onClick.bind(this);
+  }
+
+  getStyles() {
+    const { padding, rootColor, pointColor } = this.props;
+
+    return {
+      root: {
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: rootColor || '#E0E0E0',
+        borderRadius: 1,
+        padding: padding || 16,
+        marginBottom: padding || 16,
+      },
+      checked: {
+        borderColor: pointColor || '#8CB9FD',
+        color: pointColor || '#8CB9FD',
+      },
+    };
   }
 
   onClick() {
     const { onCheck, checked, index } = this.props;
-    onCheck && onCheck(checked && -1 || index);
+    onCheck && onCheck(index);
   }
 
   render() {
-    const { checked, value, children } = this.props;
+    const { checked, children } = this.props;
+    const style = this.getStyles();
+    const buttonStyle = Object.assign(style.root, checked ? style.checked : {});
     return (
-      <div className={ `btn-radio${checked && '-checked' || ''}` } onClick={ this.onClick }>
-        <div className="flex-box">
-          <div className="flex-1">
+      <div style={ buttonStyle } onClick={ this.onClick }>
+        <div style={ { display: 'inline-flex', width: '100%' } }>
+          <div style={ { flex: 1 } }>
             { children }
           </div>
           <RadioIcon checked={ checked } />
