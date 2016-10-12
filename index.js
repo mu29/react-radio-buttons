@@ -27,16 +27,20 @@ export class RadioGroup extends Component {
   }
 
   renderChild(child, index, checked) {
+    const { children, horizontal } = this.props;
     return React.cloneElement(child, {
-      index, checked, onChange: this.onChange, ...child.props
+      horizontal, index, checked,
+      last: index === children.length - 1,
+      onChange: this.onChange, ...child.props
     });
   }
 
   render() {
     const { checkedIndex } = this.state;
-    const { children, ...props } = this.props;
+    const { horizontal, children, ...props } = this.props;
+    const style = horizontal ? { display: 'inline-flex', width: '100%' } : {};
     return (
-      <div {...props}>
+      <div style={ style } {...props}>
         {
           children.map((c, i) => (this.renderChild(c, i, i === checkedIndex)))
         }
@@ -46,6 +50,7 @@ export class RadioGroup extends Component {
 }
 
 RadioGroup.propTypes = {
+  horizontal: PropTypes.boolean,
   children: PropTypes.node,
   checkedIndex: PropTypes.integer,
   onChange: PropTypes.func,
@@ -59,7 +64,7 @@ export class RadioButton extends Component {
   }
 
   getStyles() {
-    const { padding, rootColor, pointColor } = this.props;
+    const { horizontal, last, padding, rootColor, pointColor } = this.props;
 
     return {
       root: {
@@ -68,7 +73,9 @@ export class RadioButton extends Component {
         borderColor: rootColor || '#E0E0E0',
         borderRadius: 1,
         padding: padding || 16,
-        marginBottom: padding || 16,
+        flex: 1,
+        marginBottom: horizontal ? 0 : (padding || 16),
+        marginRight: horizontal && !last ? (padding || 16) / 2 : 0,
       },
       checked: {
         borderColor: pointColor || '#8CB9FD',
@@ -107,6 +114,7 @@ RadioButton.propTypes = {
   index: PropTypes.number,
   checked: PropTypes.boolean,
   children: PropTypes.node,
+  horizontal: PropTypes.boolean,
   onChange: PropTypes.func,
 };
 
