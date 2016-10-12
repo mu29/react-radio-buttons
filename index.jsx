@@ -99,7 +99,9 @@ export class RadioButton extends Component {
           <div style={ { flex: 1 } }>
             { children }
           </div>
-          <RadioIcon size={ iconSize } checked={ checked } rootColor={ rootColor } pointColor={ pointColor } />
+          <RadioIcon size={ iconSize } innerSize={ iconInnerSize } 
+            checked={ checked } rootColor={ rootColor } pointColor={ pointColor }
+          />
         </div>
       </div>
     );
@@ -108,6 +110,7 @@ export class RadioButton extends Component {
 
 RadioButton.propTypes = {
   iconSize: PropTypes.number,
+  iconInnerSize: PropTypes.number,
   padding: PropTypes.number,
   rootColor: PropTypes.string,
   pointColor: PropTypes.string,
@@ -126,7 +129,7 @@ class RadioIcon extends Component {
   }
 
   getStyles() {
-    const { size, rootColor, pointColor } = this.props;
+    const { size, innerSize, rootColor, pointColor } = this.props;
     
     return {
       root: {
@@ -143,8 +146,8 @@ class RadioIcon extends Component {
         borderColor: pointColor || '#8CB9FD',
       },
       inner: {
-        width: size || 10,
-        height: size || 10,
+        width: innerSize || 10,
+        height: innerSize || 10,
         borderRadius: '50%',
         background: pointColor || '#8CB9FD',
       }
@@ -165,6 +168,7 @@ class RadioIcon extends Component {
 
 RadioIcon.propTypes = {
   size: PropTypes.number,
+  innerSize: PropTypes.number,
   rootColor: PropTypes.string,
   pointColor: PropTypes.string,
   checked: PropTypes.boolean,
