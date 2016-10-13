@@ -1,10 +1,11 @@
-# [React](http://facebook.github.io/react/)-radio-buttons
+# react-radio-buttons
 Well-designed radio buttons for react
 
 ## Installation
 ```
 npm install react-radio-buttons --save
-```
+``` 
+Then just add `import { RadioGroup, RadioButton } from 'react-radio-buttons';` into your file.
 
 ## Screenshot
 <img src="https://raw.githubusercontent.com/mu29/react-radio-button/master/example/example.png" width="400" />
