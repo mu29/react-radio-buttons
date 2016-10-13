@@ -11,7 +11,7 @@ let App = React.createClass({
   render() {
     return (
       <div style={ { padding: 16 } }>
-        <h2>Vertical Radio Buttons</h2>
+        <h4>Vertical Radio Buttons</h4>
         <RadioGroup onChange={ this.onChange }>
           <RadioButton value="apple">
             Apple
@@ -23,7 +23,7 @@ let App = React.createClass({
             Melon
           </RadioButton>
         </RadioGroup>
-        <h2 style={ { marginTop: 64 } }>Horizontal Radio Buttons</h2>
+        <h4 style={ { marginTop: 32 } }>Horizontal Radio Buttons</h4>
         <RadioGroup onChange={ this.onChange } horizontal>
           <RadioButton value="apple">
             Apple
