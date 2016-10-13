@@ -90,7 +90,7 @@ export class RadioButton extends Component {
   }
 
   render() {
-    const { checked, iconSize, rootColor, pointColor, children } = this.props;
+    const { checked, iconSize, iconInnerSize, rootColor, pointColor, children } = this.props;
     const style = this.getStyles();
     const buttonStyle = Object.assign(style.root, checked ? style.checked : {});
     return (
