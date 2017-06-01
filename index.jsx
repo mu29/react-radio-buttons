@@ -1,10 +1,23 @@
 import React, { Component, PropTypes } from 'react';
 
+function getInitialCheckedIndex(children) {
+    let checkedIndex;
+
+    for (let i = 0; i < children.length; i++) {
+      if (!children[i].props.disabled) {
+          checkedIndex = i;
+          break;
+      }
+    }
+
+    return checkedIndex;
+}
+
 export class RadioGroup extends Component {
   constructor({ children, value }) {
     super();
     const index = children.findIndex(c => c.props.value === value);
-    this.state = { checkedIndex: index > -1 ? index : 0 };
+    this.state = { checkedIndex: (index > -1 && !children[index].disabled) ? index : getInitialCheckedIndex(children) };
     this.renderChild = this.renderChild.bind(this);
     this.onChange = this.onChange.bind(this);
   }
@@ -65,13 +78,15 @@ export class RadioButton extends Component {
   }
 
   getStyles() {
-    const { horizontal, last, padding, rootColor, pointColor } = this.props;
+    const { horizontal, last, padding, rootColor, pointColor, disabled, disabledColor } = this.props;
 
     return {
       root: {
+        cursor: disabled ? 'not-allowed' : 'pointer',
+        color: disabled ? (disabledColor || '#e1e1e1') : (rootColor || '#E0E0E0'),
         borderWidth: 1,
         borderStyle: 'solid',
-        borderColor: rootColor || '#E0E0E0',
+        borderColor: disabled ? (disabledColor || '#e1e1e1') : (rootColor || '#E0E0E0'),
         borderRadius: 1,
         padding: padding || 16,
         flex: 1,
@@ -86,12 +101,12 @@ export class RadioButton extends Component {
   }
 
   onClick() {
-    const { onChange, checked, index } = this.props;
-    onChange && onChange(index);
+    const { onChange, checked, index, disabled } = this.props;
+    !disabled && onChange && onChange(index);
   }
 
   render() {
-    const { checked, iconSize, iconInnerSize, rootColor, pointColor, children } = this.props;
+    const { checked, iconSize, iconInnerSize, rootColor, pointColor, children, disabled, disabledColor } = this.props;
     const style = this.getStyles();
     const buttonStyle = Object.assign(style.root, checked ? style.checked : {});
     return (
@@ -100,8 +115,9 @@ export class RadioButton extends Component {
           <div style={ { flex: 1 } }>
             { children }
           </div>
-          <RadioIcon size={ iconSize } innerSize={ iconInnerSize } 
+          <RadioIcon size={ iconSize } innerSize={ iconInnerSize }
             checked={ checked } rootColor={ rootColor } pointColor={ pointColor }
+            disabled={ disabled } disabledColor={ disabledColor }
           />
         </div>
       </div>
@@ -121,6 +137,8 @@ RadioButton.propTypes = {
   children: PropTypes.node,
   horizontal: PropTypes.bool,
   onChange: PropTypes.func,
+  disabled: PropTypes.bool,
+  disabledColor: PropTypes.bool
 };
 
 class RadioIcon extends Component {
@@ -130,8 +148,8 @@ class RadioIcon extends Component {
   }
 
   getStyles() {
-    const { size, innerSize, rootColor, pointColor } = this.props;
-    
+    const { size, innerSize, rootColor, pointColor, disabled, disabledColor } = this.props;
+
     return {
       root: {
         width: size || 10,
@@ -141,7 +159,7 @@ class RadioIcon extends Component {
         borderWidth: 2,
         borderRadius: '50%',
         borderStyle: 'solid',
-        borderColor: rootColor || '#9E9E9E',
+        borderColor: disabled ? (disabledColor || '#e1e1e1') : (rootColor || '#9E9E9E'),
       },
       checked: {
         borderColor: pointColor || '#8CB9FD',
@@ -173,4 +191,6 @@ RadioIcon.propTypes = {
   rootColor: PropTypes.string,
   pointColor: PropTypes.string,
   checked: PropTypes.bool,
+  disabled: PropTypes.bool,
+  disabledColor: PropTypes.string
 };
