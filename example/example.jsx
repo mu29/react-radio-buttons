@@ -2,7 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { RadioGroup, RadioButton } from '../index.jsx';
+import { RadioGroup, RadioButton, ReversedRadioButton } from '../index.jsx';
 
 let App = React.createClass({
   onChange(value) {
@@ -19,9 +19,9 @@ let App = React.createClass({
           <RadioButton value="orange">
             Orange
           </RadioButton>
-          <RadioButton value="melon">
+          <ReversedRadioButton value="melon">
             Melon
-          </RadioButton>
+          </ReversedRadioButton>
         </RadioGroup>
         <h4 style={ { marginTop: 32 } }>Horizontal Radio Buttons</h4>
         <RadioGroup onChange={ this.onChange } horizontal>
@@ -31,9 +31,9 @@ let App = React.createClass({
           <RadioButton value="orange">
             Orange
           </RadioButton>
-          <RadioButton value="melon">
+          <ReversedRadioButton value="melon">
             Melon
-          </RadioButton>
+          </ReversedRadioButton>
         </RadioGroup>
         <h4 style={ { marginTop: 32 } }>1st option disabled (prevents onChange callback and style overwrite to look disabled)</h4>
         <RadioGroup onChange={ this.onChange }>

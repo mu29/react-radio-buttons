@@ -31,6 +31,9 @@ By using `react-radio-buttons`, you can write like this (full example [here](htt
   <RadioButton value="melon">
     Melon
   </RadioButton>
+  <ReversedRadioButton value="melon">
+    Melon
+  </ReversedRadioButton>
 </RadioGroup>
 ```
 
