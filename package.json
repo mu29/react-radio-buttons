@@ -1,6 +1,6 @@
 {
   "name": "react-radio-buttons",
-  "version": "1.0.12",
+  "version": "1.1.1",
   "description": "Well-designed radio buttons for react.",
   "main": "lib/index.js",
   "scripts": {
