@@ -19,8 +19,15 @@ export class RadioGroup extends Component {
     super();
 
     const index = children.findIndex(c => c.props.value === value);
-    const checkedIndex = !(value !== undefined || value === '') ? -1 : (index > -1 && !children[index].props.disabled) ? index : getInitialCheckedIndex(children)
-    
+    let checkedIndex 
+    if (value === undefined)    // This is the case where it is not specified
+      checkedIndex = -1 
+    else {
+      if (index > -1 && !children[index].props.disabled)
+        checkedIndex = index 
+      else 
+        checkedIndex = getInitialCheckedIndex(children)
+    }
     this.state = { checkedIndex: checkedIndex };
 
     this.renderChild = this.renderChild.bind(this);
@@ -33,6 +40,17 @@ export class RadioGroup extends Component {
 
     const child = children.find(c => c.props.index === checkedIndex);
     return child && child.props.value || '';
+  }
+
+// This is the case to handle late arriving props, 
+// and set the state according to the value
+// as long as it's not disabled
+  componentWillReceiveProps(nextProps) {
+    const children = this.props.children
+    const index = children.findIndex(c => c.props.value === nextProps.value && !c.props.disabled);
+    if (index !== -1 && index !== this.state.checkedIndex) {
+      this.setState({ checkedIndex: index });
+    }
   }
 
   onChange(index) {
@@ -83,7 +101,7 @@ export class RadioButton extends Component {
   }
 
   getStyles() {
-    const { horizontal, last, padding, rootColor, pointColor, disabled, disabledColor } = this.props;
+    const { horizontal, last, padding, rootColor, pointColor, disabled, disabledColor, label } = this.props;
 
     return {
       root: {
@@ -95,8 +113,15 @@ export class RadioButton extends Component {
         borderRadius: 1,
         padding: padding || 16,
         flex: 1,
-        marginBottom: horizontal ? 0 : (padding || 16),
+        marginBottom: horizontal ? 0 : label ? (padding || 16) / 2 : (padding || 16),
         marginRight: horizontal && !last ? (padding || 16) / 2 : 0,
+      },
+      label: {
+        color: pointColor || '#8CB9FD',
+        borderStyle: 'none',
+        padding: padding || 8,
+        marginBottom: horizontal ? 0 : (padding || 8),
+        marginRight: horizontal && !last ? (padding || 8) / 2 : 0
       },
       checked: {
         borderColor: pointColor || '#8CB9FD',
@@ -111,10 +136,13 @@ export class RadioButton extends Component {
   }
 
   render() {
-    const { checked, iconSize, iconInnerSize, rootColor, pointColor, children, disabled, disabledColor } = this.props;
+    const { checked, iconSize, iconInnerSize, rootColor, pointColor, children, disabled, disabledColor, label } = this.props;
     const style = this.getStyles();
-    const buttonStyle = Object.assign(style.root, checked ? style.checked : {});
+    const buttonStyle = Object.assign({}, style.root, checked ? style.checked : {});
+    const labelStyle = Object.assign({}, style.root, style.label)
+
     return (
+
       <div style={buttonStyle} onClick={this.onClick}>
         <div style={{ display: 'inline-flex', width: '100%' }}>
           <div style={{ flex: 1 }}>
@@ -125,6 +153,13 @@ export class RadioButton extends Component {
             disabled={disabled} disabledColor={disabledColor}
           />
         </div>
+        {
+          label ? (
+            <div style={labelStyle}>
+              <div>{label}</div>
+            </div>
+            ) : ''
+        }
       </div>
     );
   }
@@ -143,7 +178,8 @@ RadioButton.propTypes = {
   horizontal: PropTypes.bool,
   onChange: PropTypes.func,
   disabled: PropTypes.bool,
-  disabledColor: PropTypes.string
+  disabledColor: PropTypes.string,
+  label: PropTypes.string
 };
 
 export class ReversedRadioButton extends Component {
@@ -154,7 +190,7 @@ export class ReversedRadioButton extends Component {
   }
 
   getStyles() {
-    const { horizontal, last, padding, rootColor, pointColor, disabled, disabledColor } = this.props;
+    const { horizontal, last, padding, rootColor, pointColor, disabled, disabledColor, label } = this.props;
 
     return {
       root: {
@@ -169,6 +205,13 @@ export class ReversedRadioButton extends Component {
         marginBottom: horizontal ? 0 : (padding || 16),
         marginRight: horizontal && !last ? (padding || 16) / 2 : 0,
       },
+      label: {
+        color: pointColor || '#8CB9FD',
+        borderStyle: 'none',
+        padding: padding || 8,
+        marginBottom: horizontal ? 0 : (padding || 8),
+        marginRight: horizontal && !last ? (padding || 8) / 2 : 0
+      },
       checked: {
         borderColor: pointColor || '#8CB9FD',
         color: pointColor || '#8CB9FD',
@@ -182,9 +225,11 @@ export class ReversedRadioButton extends Component {
   }
 
   render() {
-    const { checked, iconSize, iconInnerSize, rootColor, pointColor, children, disabled, disabledColor, padding } = this.props;
+    const { checked, iconSize, iconInnerSize, rootColor, pointColor, children, disabled, disabledColor, padding, label } = this.props;
     const style = this.getStyles();
-    const buttonStyle = Object.assign(style.root, checked ? style.checked : {});
+    const buttonStyle = Object.assign({}, style.root, checked ? style.checked : {});
+    const labelStyle = Object.assign({}, style.root, style.label)
+    
     return (
       <div style={buttonStyle} onClick={this.onClick}>
         <div style={{ display: 'inline-flex', width: '100%' }}>
@@ -197,6 +242,13 @@ export class ReversedRadioButton extends Component {
             {children}
           </div>
         </div>
+        {
+          label ? (
+            <div style={labelStyle}>
+              <div>{label}</div>
+            </div>
+            ) : ''
+        }
       </div>
     );
   }
@@ -215,7 +267,8 @@ ReversedRadioButton.propTypes = {
   horizontal: PropTypes.bool,
   onChange: PropTypes.func,
   disabled: PropTypes.bool,
-  disabledColor: PropTypes.bool
+  disabledColor: PropTypes.bool,
+  label: PropTypes.string
 };
 
 export class RadioIcon extends Component {
